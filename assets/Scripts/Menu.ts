@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, AudioClip, tween, EventTouch, director } from 'cc';
+import { _decorator, Component, Node, AudioClip, tween, Vec3, UITransform, EventTouch, director } from 'cc';
 import { TIMING } from './Constants';
 import { AudioMgr } from './AudioMgr';
 
@@ -32,14 +32,26 @@ export class Menu extends Component {
     }
 
     onTouchStart(event: EventTouch): void {
-        const uiPos = event.getUILocation();
-        this.knife.setPosition(uiPos.x, uiPos.y);
+        const { x, y } = event.getUILocation();
+        const uiTransform = this.knife.parent?.getComponent(UITransform);
+        if (uiTransform) {
+            const localPos = uiTransform.convertToNodeSpaceAR(new Vec3(x, y, 0));
+            this.knife.setPosition(localPos.x, localPos.y);
+        } else {
+            this.knife.setPosition(x, y);
+        }
         if (this.knifeMotionT?.reset) this.knifeMotionT.reset();
     }
 
     onTouchMove(event: EventTouch): void {
-        const uiPos = event.getUILocation();
-        this.knife.setPosition(uiPos.x, uiPos.y);
+        const { x, y } = event.getUILocation();
+        const uiTransform = this.knife.parent?.getComponent(UITransform);
+        if (uiTransform) {
+            const localPos = uiTransform.convertToNodeSpaceAR(new Vec3(x, y, 0));
+            this.knife.setPosition(localPos.x, localPos.y);
+        } else {
+            this.knife.setPosition(x, y);
+        }
     }
 
     onTouchEnd(_event: EventTouch): void {

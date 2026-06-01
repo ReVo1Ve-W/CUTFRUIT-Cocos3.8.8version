@@ -97,7 +97,7 @@ export class FruitGroup extends Component {
 
         if (this._gameScript) {
             this._gameScript.loseLife();
-            this._gameScript.upDateUi();
+            this._gameScript.updateUI();
         }
 
         if (!this._gameScript?.isGameOver) {

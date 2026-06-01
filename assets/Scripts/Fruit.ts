@@ -57,6 +57,7 @@ export class Fruit extends Component {
         const rigidBody = this.node.getComponent(RigidBody2D);
         if (rigidBody) {
             rigidBody.enabled = true;
+            rigidBody.linearVelocity = new Vec2(0, 0);
             const forceY = Math.floor(random(this.forceMin, this.forceMax));
             const forceX = Math.floor(random(this.forceHorzMin, this.forceHorzMax));
             rigidBody.angularVelocity = random(-1, 1) > 0 ? ANGULAR_VELOCITY : -ANGULAR_VELOCITY;

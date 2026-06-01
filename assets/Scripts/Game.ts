@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, AudioClip, tween, Vec3, Vec2, director, sys, PhysicsSystem2D, EventTouch } from 'cc';
+import { _decorator, Component, Node, Label, AudioClip, tween, Vec3, Vec2, UITransform, director, sys, PhysicsSystem2D, EventTouch } from 'cc';
 import { TIMING, SCORE, PHYSICS } from './Constants';
 import { AudioMgr } from './AudioMgr';
 
@@ -65,15 +65,27 @@ export class Game extends Component {
     }
 
     onTouchStart(event: EventTouch): void {
-        const uiPos = event.getUILocation();
-        this.knife.setPosition(uiPos.x, uiPos.y);
+        const { x, y } = event.getUILocation();
+        const uiTransform = this.knife.parent?.getComponent(UITransform);
+        if (uiTransform) {
+            const localPos = uiTransform.convertToNodeSpaceAR(new Vec3(x, y, 0));
+            this.knife.setPosition(localPos.x, localPos.y);
+        } else {
+            this.knife.setPosition(x, y);
+        }
         this.setKnifeColliderEnabled(true);
         if (this.knifeMotionT?.reset) this.knifeMotionT.reset();
     }
 
     onTouchMove(event: EventTouch): void {
-        const uiPos = event.getUILocation();
-        this.knife.setPosition(uiPos.x, uiPos.y);
+        const { x, y } = event.getUILocation();
+        const uiTransform = this.knife.parent?.getComponent(UITransform);
+        if (uiTransform) {
+            const localPos = uiTransform.convertToNodeSpaceAR(new Vec3(x, y, 0));
+            this.knife.setPosition(localPos.x, localPos.y);
+        } else {
+            this.knife.setPosition(x, y);
+        }
     }
 
     onTouchEnd(_event: EventTouch): void {
