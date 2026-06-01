@@ -13,9 +13,9 @@ export class Fruit extends Component {
     @property(Node) splitAni: Node = null!;
     @property type: string = 'fruit';
     @property forceHorzMin: number = 0;
-    @property forceHorzMax: number = 80;
-    @property forceMin: number = 300;
-    @property forceMax: number = 420;
+    @property forceHorzMax: number = 200;
+    @property forceMin: number = 600;
+    @property forceMax: number = 850;
     @property colorType: number = 1;
     @property(AudioClip) cutFruitAudio: AudioClip = null!;
     @property(AudioClip) cutBombAudio: AudioClip = null!;
@@ -114,7 +114,6 @@ export class Fruit extends Component {
         const state = this.ani.getState(clips[0].name);
         if (!state) return;
         state.time = 0;
-        (this.ani as any).sample();
     }
 
     returnToPool(isBombBack: boolean = false): void {
