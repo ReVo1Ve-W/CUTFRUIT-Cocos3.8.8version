@@ -26,6 +26,6 @@ export const BOMB_FLASH = {
     INITIAL_OPACITY: 230,
 } as const;
 
-export const FRUIT_PHYSICS = {
-    ANGULAR_VELOCITY: 100,
+export const PHYSICS = {
+    GRAVITY_Y: -320,
 } as const;

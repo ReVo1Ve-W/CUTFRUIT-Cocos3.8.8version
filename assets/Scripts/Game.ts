@@ -1,6 +1,7 @@
-import { _decorator, Component, Node, AudioClip, Label, tween, Vec3, director, sys } from 'cc';
-import { TIMING, SCORE } from './Constants';
+import { _decorator, Component, Node, Label, AudioClip, tween, Vec3, Vec2, director, sys, PhysicsSystem2D, EventTouch } from 'cc';
+import { TIMING, SCORE, PHYSICS } from './Constants';
 import { AudioMgr } from './AudioMgr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('LifeIcon')
@@ -13,82 +14,83 @@ export class Game extends Component {
     @property(Node) knife: Node = null!;
     @property(Label) scoreLabel: Label = null!;
     @property([LifeIcon]) lifeIcons: LifeIcon[] = [];
-    // 不需要在编辑器绑定，onLoad 里自动找
     @property(Node) gameOverMask: Node = null!;
     @property(Label) bestScoreLabel: Label = null!;
     @property(AudioClip) buttonClip: AudioClip = null!;
 
     private fruitGroup: any = null;
-
     private knifeMotionT: any = null;
     private isGameOver: boolean = false;
     private score: number = 0;
     private bestScore: number = 0;
     private life: number = 0;
 
-    onLoad() {
+    onLoad(): void {
+        PhysicsSystem2D.instance.enable = true;
+        PhysicsSystem2D.instance.gravity = new Vec2(0, PHYSICS.GRAVITY_Y);
+
         this.knifeMotionT = this.knife.getComponent('MotionTrail');
-        // 自动找 fruitGroup，不需要编辑器绑定
-        let fgNode = this.node.getChildByName('fruitGroup');
+        const fgNode = this.node.getChildByName('fruitGroup');
         if (fgNode) {
             this.fruitGroup = fgNode.getComponent('FruitGroup');
         }
     }
 
-    start() {
-        this.knifeMove();
+    start(): void {
+        this.registerTouchEvents();
         this.init();
     }
 
-    init() {
+    init(): void {
         this.isGameOver = false;
         this.score = 0;
         this.bestScore = 0;
-        let max = sys.localStorage.getItem("Best score");
-        if (max) {
-            this.bestScore = parseInt(max);
-            this.bestScoreLabel.string = "最佳分数 : " + this.bestScore;
+
+        const saved = sys.localStorage.getItem('Best score');
+        if (saved) {
+            this.bestScore = parseInt(saved);
+            this.bestScoreLabel.string = '最佳分数 : ' + this.bestScore;
         }
+
         this.life = 0;
-        this.lifeIcons.forEach((a) => {
-            a.lifeConsume.active = false;
-        });
-        this.upDateUi();
-        if (this.fruitGroup) {
-            this.fruitGroup.createFruitList();
-        }
+        this.lifeIcons.forEach(a => { a.lifeConsume.active = false; });
+        this.updateUI();
+        this.fruitGroup?.createFruitList();
     }
 
-    knifeMove() {
-        this.node.on(Node.EventType.TOUCH_START, this.startEvent, this);
-        this.node.on(Node.EventType.TOUCH_MOVE, this.moveEvent, this);
-        this.node.on(Node.EventType.TOUCH_END, this.endEvent, this);
+    registerTouchEvents(): void {
+        this.node.on(Node.EventType.TOUCH_START, this.onTouchStart, this);
+        this.node.on(Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        this.node.on(Node.EventType.TOUCH_END, this.onTouchEnd, this);
     }
 
-    startEvent(event: any) {
-        let uiPos = event.getUILocation();
+    onTouchStart(event: EventTouch): void {
+        const uiPos = event.getUILocation();
         this.knife.setPosition(uiPos.x, uiPos.y);
-        const knifeCol = this.knife.getComponent('BoxCollider2D') as any;
-        if (knifeCol) knifeCol.enabled = true;
+        this.setKnifeColliderEnabled(true);
         if (this.knifeMotionT?.reset) this.knifeMotionT.reset();
     }
 
-    moveEvent(event: any) {
-        let uiPos = event.getUILocation();
+    onTouchMove(event: EventTouch): void {
+        const uiPos = event.getUILocation();
         this.knife.setPosition(uiPos.x, uiPos.y);
     }
 
-    endEvent(_event: any) {
-        const knifeCol = this.knife.getComponent('BoxCollider2D') as any;
-        if (knifeCol) knifeCol.enabled = false;
+    onTouchEnd(_event: EventTouch): void {
+        this.setKnifeColliderEnabled(false);
     }
 
-    updateScore(isHit: boolean, score: number) {
+    private setKnifeColliderEnabled(enabled: boolean): void {
+        const col = this.knife.getComponent('BoxCollider2D') as any;
+        if (col) col.enabled = enabled;
+    }
+
+    updateScore(isHit: boolean, score: number): void {
         if (this.isGameOver) return;
         if (isHit) {
             this.score += score;
         } else {
-            let penalty = score * SCORE.PENALTY_MULTIPLIER;
+            const penalty = score * SCORE.PENALTY_MULTIPLIER;
             if (this.score <= penalty) {
                 this.loseLife();
                 this.score = 0;
@@ -96,49 +98,51 @@ export class Game extends Component {
                 this.score -= penalty;
             }
         }
-        this.upDateUi();
+        this.updateUI();
     }
 
-    loseLife() {
+    loseLife(): void {
         this.life++;
-        if (this.life >= SCORE.MAX_LIVES) this.gameOverHandle();
-    }
-
-    upDateUi() {
-        this.scoreLabel.string = "分数 : " + this.score;
-        for (let i = 0; i < this.life; i++) {
-            if (this.lifeIcons[i]) {
-                this.lifeIcons[i].lifeConsume.active = true;
-            }
+        if (this.life >= SCORE.MAX_LIVES) {
+            this.gameOver();
         }
     }
 
-    gameOverHandle() {
+    updateUI(): void {
+        this.scoreLabel.string = '分数 : ' + this.score;
+        for (let i = 0; i < this.life; i++) {
+            const icon = this.lifeIcons[i];
+            if (icon) icon.lifeConsume.active = true;
+        }
+    }
+
+    gameOver(): void {
         this.isGameOver = true;
-        const knifeCol = this.knife.getComponent('BoxCollider2D') as any;
-        if (knifeCol) knifeCol.enabled = false;
+        this.setKnifeColliderEnabled(false);
+
         if (this.score > this.bestScore) {
             this.bestScore = this.score;
             this.bestScoreLabel.string = '最佳分数 : ' + this.bestScore;
-            sys.localStorage.setItem("Best score", this.bestScore.toString());
+            sys.localStorage.setItem('Best score', this.bestScore.toString());
         }
+
         this.scheduleOnce(() => {
-            this.showTheGameOverMask(true);
+            this.showGameOverMask(true);
         }, TIMING.GAME_OVER_DELAY);
     }
 
-    returnMenu() {
+    returnMenu(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
         director.loadScene('Menu');
     }
 
-    restartGame() {
+    restartGame(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
-        this.showTheGameOverMask(false);
+        this.showGameOverMask(false);
         this.init();
     }
 
-    showTheGameOverMask(show: boolean) {
+    showGameOverMask(show: boolean): void {
         if (show) {
             this.gameOverMask.active = true;
             this.gameOverMask.setScale(0.95, 0.95, 1);
@@ -148,10 +152,14 @@ export class Game extends Component {
         } else {
             tween(this.gameOverMask)
                 .to(TIMING.FADE_OUT_TWEEN, { scale: new Vec3(0.01, 0.01, 1) })
-                .call(() => {
-                    this.gameOverMask.active = false;
-                })
+                .call(() => { this.gameOverMask.active = false; })
                 .start();
         }
+    }
+
+    onDestroy(): void {
+        this.node.off(Node.EventType.TOUCH_START, this.onTouchStart, this);
+        this.node.off(Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        this.node.off(Node.EventType.TOUCH_END, this.onTouchEnd, this);
     }
 }

@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Color, tween, UIOpacity } from 'cc';
 import { TIMING } from './Constants';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('FruitJuice')
@@ -8,11 +9,11 @@ export class FruitJuice extends Component {
 
     private _parentGroup: any = null;
 
-    onLoad() {
+    onLoad(): void {
         this._parentGroup = this.node.parent?.getComponent('JuiceGroup');
     }
 
-    init(rotation: number, color: Color, initialOpacity: number) {
+    init(rotation: number, color: Color, initialOpacity: number): void {
         this.node.angle = rotation;
         (this.juiceSprite as any).color = color;
 
@@ -25,7 +26,7 @@ export class FruitJuice extends Component {
         tween(uiOpacity)
             .to(TIMING.JUICE_FADE_DURATION, { opacity: 0 })
             .call(() => {
-                if (this._parentGroup && this.node && this.node.isValid) {
+                if (this._parentGroup && this.node?.isValid) {
                     this._parentGroup.backNode(this.node);
                 }
             })

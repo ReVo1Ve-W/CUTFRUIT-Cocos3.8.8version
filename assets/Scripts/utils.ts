@@ -1,30 +1,36 @@
 import { NodePool, instantiate, Node, Prefab, warn } from 'cc';
 
-export function batchInitObjPool(targetObj: any, objArray: any[]) {
-    for (let i = 0; i < objArray.length; i++) {
-        initObjPool(targetObj, objArray[i]);
+export interface PoolConfig {
+    name: string;
+    prefab: Prefab;
+    initPoolCount?: number;
+}
+
+export function batchInitObjPool(poolMap: Map<string, NodePool>, configs: PoolConfig[]): void {
+    for (const config of configs) {
+        initObjPool(poolMap, config);
     }
 }
 
-export function initObjPool(targetObj: any, objInfo: any) {
-    if (!objInfo || !objInfo.prefab) {
-        warn('initObjPool: objInfo or objInfo.prefab is missing');
+export function initObjPool(poolMap: Map<string, NodePool>, config: PoolConfig): void {
+    if (!config?.prefab) {
+        warn('initObjPool: config or config.prefab is missing');
         return;
     }
-    let poolName = objInfo.name + 'Pool';
-    targetObj[poolName] = new NodePool();
-    let initPoolCount = objInfo.initPoolCount || 0;
-    for (let i = 0; i < initPoolCount; ++i) {
-        let nodeO = instantiate(objInfo.prefab);
-        targetObj[poolName].put(nodeO);
+    const pool = new NodePool();
+    const count = config.initPoolCount || 0;
+    for (let i = 0; i < count; i++) {
+        pool.put(instantiate(config.prefab));
     }
+    poolMap.set(config.name + 'Pool', pool);
 }
 
-export function genNewNode(pool: NodePool, prefab: Prefab | null, nodeParent: Node): Node | null {
-    let newNode = pool.size() > 0 ? pool.get() : null;
+export function genNewNode(poolMap: Map<string, NodePool>, poolName: string, prefab: Prefab | null, nodeParent: Node): Node | null {
+    const pool = poolMap.get(poolName);
+    let newNode: Node | null = pool && pool.size() > 0 ? pool.get() : null;
     if (!newNode) {
         if (!prefab) {
-            warn('genNewNode: pool is empty and no prefab provided');
+            warn('genNewNode: pool empty and no prefab provided');
             return null;
         }
         newNode = instantiate(prefab);
@@ -33,9 +39,10 @@ export function genNewNode(pool: NodePool, prefab: Prefab | null, nodeParent: No
     return newNode;
 }
 
-export function backObjPool(targetObj: any, poolName: string, nodeInfo: Node) {
-    if (targetObj[poolName]) {
-        targetObj[poolName].put(nodeInfo);
+export function backObjPool(poolMap: Map<string, NodePool>, poolName: string, nodeInfo: Node): void {
+    const pool = poolMap.get(poolName);
+    if (pool) {
+        pool.put(nodeInfo);
     }
 }
 

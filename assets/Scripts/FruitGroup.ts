@@ -1,7 +1,8 @@
-import { _decorator, Component, Node, Prefab, AudioClip, tween, UIOpacity } from 'cc';
+import { _decorator, Component, Node, Prefab, AudioClip, tween, UIOpacity, NodePool } from 'cc';
 import { TIMING, BOMB_FLASH } from './Constants';
 import { AudioMgr } from './AudioMgr';
-import { batchInitObjPool, genNewNode, random, backObjPool } from './utils';
+import { batchInitObjPool, genNewNode, random, backObjPool, PoolConfig } from './utils';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('FruitConfig')
@@ -20,91 +21,98 @@ export class FruitGroup extends Component {
     @property([FruitConfig]) fruitConfigs: FruitConfig[] = [];
     @property(AudioClip) throwBomb: AudioClip = null!;
 
-    private noBombArr: FruitConfig[] = [];
+    private noBombConfigs: FruitConfig[] = [];
     private _gameScript: any = null;
     private _juiceGroup: any = null;
-    private _scheduledCreate: boolean = false;
+    private _waveScheduled: boolean = false;
+    private _poolMap: Map<string, NodePool> = new Map();
 
-    onLoad() {
+    onLoad(): void {
         this._gameScript = this.node.parent?.getComponent('Game');
-        let juiceNode = this.node.parent?.getChildByName('fruitJuice');
+        const juiceNode = this.node.parent?.getChildByName('fruitJuice');
         if (juiceNode) {
             this._juiceGroup = juiceNode.getComponent('JuiceGroup');
         }
-        this.noBombArr = this.fruitConfigs.filter(a => a.type == 'fruit');
-        batchInitObjPool(this, this.fruitConfigs);
+        this.noBombConfigs = this.fruitConfigs.filter(c => c.type === 'fruit');
+        batchInitObjPool(this._poolMap, this.fruitConfigs as PoolConfig[]);
     }
 
-    scheduleCreateWave() {
-        if (this._scheduledCreate) return;
-        this._scheduledCreate = true;
+    scheduleCreateWave(): void {
+        if (this._waveScheduled) return;
+        this._waveScheduled = true;
         this.scheduleOnce(() => {
-            this._scheduledCreate = false;
+            this._waveScheduled = false;
             this.createFruitList();
         }, TIMING.WAVE_CREATE_DELAY);
     }
 
-    createFruitList() {
-        let totalFr = this.fruitConfigs;
-        let randomLength = Math.floor(random(1, this.maxLength + 0.4));
-        for (let i = 0; i < randomLength; i++) {
-            let ran: number, fruit: FruitConfig, poolName: string;
-            ran = Math.floor(random(0, totalFr.length - 0.1));
-            fruit = totalFr[ran];
-            poolName = fruit.name + 'Pool';
-            let fruitNode = genNewNode((this as any)[poolName], fruit.prefab, this.node);
+    createFruitList(): void {
+        let configs = this.fruitConfigs;
+        const count = Math.floor(random(1, this.maxLength + 0.4));
+
+        for (let i = 0; i < count; i++) {
+            const idx = Math.floor(random(0, configs.length - 0.1));
+            const fruitConfig = configs[idx];
+            const poolName = fruitConfig.name + 'Pool';
+
+            const fruitNode = genNewNode(this._poolMap, poolName, fruitConfig.prefab, this.node);
             if (!fruitNode) continue;
-            let ui = fruitNode.getComponent('UITransform') as any;
-            let parentUi = this.node.getComponent('UITransform') as any;
-            let hw = parentUi ? parentUi.width / 2 : 375;
-            let hh = parentUi ? parentUi.height / 2 : 375;
-            let fw = ui ? ui.width / 2 : 20;
-            let fh = ui ? ui.height / 2 : 20;
+
+            const ui = fruitNode.getComponent('UITransform') as any;
+            const parentUi = this.node.getComponent('UITransform') as any;
+            const hw = parentUi ? parentUi.width / 2 : 375;
+            const hh = parentUi ? parentUi.height / 2 : 375;
+            const fw = ui ? ui.width / 2 : 20;
+            const fh = ui ? ui.height / 2 : 20;
             fruitNode.setPosition(random(-hw + fw, hw - fw), -(hh - fh));
-            let fruitComp: any = fruitNode.getComponent('Fruit');
-            if (fruitComp) {
-                fruitComp.init(poolName, fruit.score, this._gameScript, this, this._juiceGroup);
-            }
-            if (fruit.type == 'bomb') {
+
+            const fruitComp: any = fruitNode.getComponent('Fruit');
+            fruitComp?.init(poolName, fruitConfig.score, this._gameScript, this, this._juiceGroup);
+
+            if (fruitConfig.type === 'bomb') {
                 AudioMgr.inst.playOneShot(this.throwBomb);
-                totalFr = this.noBombArr;
+                configs = this.noBombConfigs;
             }
         }
     }
 
-    checkRemain() {
+    checkRemain(): void {
         if (this._gameScript?.isGameOver) return;
-        if (this.node.children.length == 0) {
+        if (this.node.children.length === 0) {
             this.scheduleCreateWave();
         }
     }
 
-    cutBombRemoveAllChildren() {
+    cutBombRemoveAllChildren(): void {
         this.flashScreen();
-        let childObjArr: any[] = [];
-        this.node.children.forEach((child) => {
-            let comp = child.getComponent('Fruit');
-            if (comp) childObjArr.push(comp);
+
+        const fruitComps: any[] = [];
+        this.node.children.forEach(child => {
+            const comp = child.getComponent('Fruit');
+            if (comp) fruitComps.push(comp);
         });
-        for (let i = 0; i < childObjArr.length; i++) {
-            childObjArr[i].backThisNode(true);
+        for (const comp of fruitComps) {
+            comp.returnToPool(true);
         }
+
         if (this._gameScript) {
             this._gameScript.loseLife();
             this._gameScript.upDateUi();
         }
+
         if (!this._gameScript?.isGameOver) {
             this.scheduleCreateWave();
         }
     }
 
-    flashScreen() {
+    flashScreen(): void {
         this.flashNode.active = true;
         let uiOpacity = this.flashNode.getComponent(UIOpacity);
         if (!uiOpacity) {
             uiOpacity = this.flashNode.addComponent(UIOpacity);
         }
         uiOpacity.opacity = BOMB_FLASH.INITIAL_OPACITY;
+
         tween(uiOpacity)
             .to(TIMING.FLASH_DURATION, { opacity: 0 })
             .call(() => {
@@ -113,10 +121,9 @@ export class FruitGroup extends Component {
             .start();
     }
 
-    recycleNode(fruitComp: any) {
-        let poolName = fruitComp.poolName;
-        if (poolName) {
-            backObjPool(this, poolName, fruitComp.node);
+    recycleNode(fruitComp: any): void {
+        if (fruitComp.poolName) {
+            backObjPool(this._poolMap, fruitComp.poolName, fruitComp.node);
         }
     }
 }

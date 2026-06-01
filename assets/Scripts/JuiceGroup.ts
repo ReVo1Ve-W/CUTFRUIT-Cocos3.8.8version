@@ -1,6 +1,7 @@
-import { _decorator, Component, Node, Prefab, Color, Vec3 } from 'cc';
+import { _decorator, Component, Node, Prefab, Color, Vec3, NodePool } from 'cc';
 import { POOL } from './Constants';
 import { initObjPool, genNewNode, backObjPool, random } from './utils';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('JuiceColor')
@@ -13,35 +14,32 @@ export class JuiceColor {
 @ccclass('JuiceGroup')
 export class JuiceGroup extends Component {
     @property([JuiceColor]) juiceColors: JuiceColor[] = [];
-    @property(Prefab) juicePfb: Prefab = null!;
+    @property(Prefab) juicePrefab: Prefab = null!;
 
     private poolName: string = 'fruitJuicePool';
+    private _poolMap: Map<string, NodePool> = new Map();
 
-    onLoad() {
-        let createPoolObj = {
+    onLoad(): void {
+        initObjPool(this._poolMap, {
             name: 'fruitJuice',
-            prefab: this.juicePfb,
-            initPoolCount: POOL.FRUIT_JUICE_SIZE
-        };
-        initObjPool(this, createPoolObj);
+            prefab: this.juicePrefab,
+            initPoolCount: POOL.FRUIT_JUICE_SIZE,
+        });
     }
 
-    createJuiceBg(pos: Vec3, colorType: number) {
-        let currJuiceColor = this.juiceColors.find(a => a.code == colorType);
+    createJuiceBg(pos: Vec3, colorType: number): void {
+        const currJuiceColor = this.juiceColors.find(a => a.code === colorType);
         if (!currJuiceColor) return;
-        let color = currJuiceColor.color;
-        let rotation = random(0, 359);
-        let opacity = currJuiceColor.opacity;
-        let juiceNode = genNewNode((this as any)[this.poolName], this.juicePfb, this.node);
+
+        const juiceNode = genNewNode(this._poolMap, this.poolName, this.juicePrefab, this.node);
         if (!juiceNode) return;
+
         juiceNode.setPosition(pos);
         const juiceComp: any = juiceNode.getComponent('FruitJuice');
-        if (juiceComp) {
-            juiceComp.init(rotation, color, opacity);
-        }
+        juiceComp?.init(random(0, 359), currJuiceColor.color, currJuiceColor.opacity);
     }
 
-    backNode(nodeInfo: Node) {
-        backObjPool(this, this.poolName, nodeInfo);
+    backNode(nodeInfo: Node): void {
+        backObjPool(this._poolMap, this.poolName, nodeInfo);
     }
 }
