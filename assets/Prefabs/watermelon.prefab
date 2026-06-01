@@ -1354,8 +1354,8 @@
     "type": "fruit",
     "forceHorzMin": 0,
     "forceHorzMax": 80,
-    "forceMin": 550,
-    "forceMax": 850,
+    "forceMin": 1300,
+    "forceMax": 1600,
     "colorType": 3,
     "cutFruitAudio": {
       "__uuid__": "8eb349da-1065-4c8f-a74c-c6a191682795",

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, AudioClip, tween, Vec3, Vec2, UITransform, director, sys, PhysicsSystem2D, EventTouch } from 'cc';
+import { _decorator, Component, Node, Label, AudioClip, tween, Vec3, Vec2, UITransform, director, sys, PhysicsSystem2D, EventTouch, RigidBody2D, ERigidBody2DType } from 'cc';
 import { TIMING, SCORE, PHYSICS } from './Constants';
 import { AudioMgr } from './AudioMgr';
 
@@ -28,6 +28,14 @@ export class Game extends Component {
     onLoad(): void {
         PhysicsSystem2D.instance.enable = true;
         PhysicsSystem2D.instance.gravity = new Vec2(0, PHYSICS.GRAVITY_Y);
+
+        const knifeBody = this.knife.getComponent(RigidBody2D);
+        if (!knifeBody) {
+            const rb = this.knife.addComponent(RigidBody2D);
+            rb.type = ERigidBody2DType.Kinematic;
+            rb.gravityScale = 0;
+            rb.enabledContactListener = true;
+        }
 
         this.knifeMotionT = this.knife.getComponent('MotionTrail');
         const fgNode = this.node.getChildByName('fruitGroup');
@@ -95,6 +103,8 @@ export class Game extends Component {
     private setKnifeColliderEnabled(enabled: boolean): void {
         const col = this.knife.getComponent('BoxCollider2D') as any;
         if (col) col.enabled = enabled;
+        const rb = this.knife.getComponent(RigidBody2D);
+        if (rb) rb.enabled = enabled;
     }
 
     updateScore(isHit: boolean, score: number): void {
