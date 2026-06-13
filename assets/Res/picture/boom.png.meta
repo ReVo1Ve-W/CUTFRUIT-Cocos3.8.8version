@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "b5fb96f3-0dcf-484a-b54c-79462c6925e3",
+  "uuid": "7d61081d-6b1c-4dcc-98bf-10e3e1263eeb",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "b5fb96f3-0dcf-484a-b54c-79462c6925e3@6c48a",
+      "uuid": "7d61081d-6b1c-4dcc-98bf-10e3e1263eeb@6c48a",
       "displayName": "boom",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "b5fb96f3-0dcf-484a-b54c-79462c6925e3",
+        "imageUuidOrDatabaseUri": "7d61081d-6b1c-4dcc-98bf-10e3e1263eeb",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "b5fb96f3-0dcf-484a-b54c-79462c6925e3@f9941",
+      "uuid": "7d61081d-6b1c-4dcc-98bf-10e3e1263eeb@f9941",
       "displayName": "boom",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "b5fb96f3-0dcf-484a-b54c-79462c6925e3@6c48a",
+        "imageUuidOrDatabaseUri": "7d61081d-6b1c-4dcc-98bf-10e3e1263eeb@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "b5fb96f3-0dcf-484a-b54c-79462c6925e3@6c48a"
+    "redirect": "7d61081d-6b1c-4dcc-98bf-10e3e1263eeb@6c48a"
   }
 }

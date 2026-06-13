@@ -12,15 +12,19 @@ export class Menu extends Component {
     @property(Node) btnBeginfR: Node = null!;
     @property(Node) btnQuitfR: Node = null!;
     @property(AudioClip) buttonClip: AudioClip = null!;
+    @property(AudioClip) bgmClip: AudioClip = null!;
 
     private knifeMotionT: any = null;
 
     onLoad(): void {
-        director.preloadScene('Menu-001');
+        director.preloadScene('Menu');
         this.knifeMotionT = this.knife.getComponent('MotionTrail');
     }
 
     start(): void {
+        if (this.bgmClip) {
+            AudioMgr.inst.playBGM(this.bgmClip);
+        }
         this.registerTouchEvents();
         this.startCircleRotation();
     }
@@ -68,14 +72,29 @@ export class Menu extends Component {
         tween(this.btnQuitfR).then(createRotate(-360)).start();
     }
 
+    toggleBGM(): void {
+        if (AudioMgr.inst.isBGMPlaying) {
+            AudioMgr.inst.pauseBGM();
+        } else {
+            AudioMgr.inst.resumeBGM();
+        }
+    }
+
     backList(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
         director.loadScene('Detail');
     }
 
     gameStart(): void {
+        AudioMgr.inst.stopBGM();
         AudioMgr.inst.playOneShot(this.buttonClip);
-        director.loadScene('Menu-001');
+        director.loadScene('Begin');
+    }
+
+    SettingList(): void {
+        AudioMgr.inst.stopBGM();
+        AudioMgr.inst.playOneShot(this.buttonClip);
+        director.loadScene('Setting');
     }
 
     onDestroy(): void {

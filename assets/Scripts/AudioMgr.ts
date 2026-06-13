@@ -22,6 +22,37 @@ export class AudioMgr {
         }
     }
 
+    playBGM(clip: AudioClip, volume: number = 1): void {
+        if (!this._audioSource || !clip) return;
+        this._audioSource.stop();
+        this._audioSource.clip = clip;
+        this._audioSource.loop = true;
+        this._audioSource.volume = volume;
+        this._audioSource.play();
+    }
+
+    stopBGM(): void {
+        if (this._audioSource) {
+            this._audioSource.stop();
+        }
+    }
+
+    pauseBGM(): void {
+        if (this._audioSource && this._audioSource.playing) {
+            this._audioSource.pause();
+        }
+    }
+
+    resumeBGM(): void {
+        if (this._audioSource && this._audioSource.clip) {
+            this._audioSource.play();
+        }
+    }
+
+    get isBGMPlaying(): boolean {
+        return this._audioSource?.playing ?? false;
+    }
+
     static destroy(): void {
         if (this._inst) {
             if (this._inst._node?.isValid) {

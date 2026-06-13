@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "26270f3a-1510-48ae-8c8d-ca7dbeff60c1",
+  "uuid": "72513fe6-fc9e-4d2a-adac-bcbe8c3c9e9b",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "26270f3a-1510-48ae-8c8d-ca7dbeff60c1@6c48a",
+      "uuid": "72513fe6-fc9e-4d2a-adac-bcbe8c3c9e9b@6c48a",
       "displayName": "apple",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "26270f3a-1510-48ae-8c8d-ca7dbeff60c1",
+        "imageUuidOrDatabaseUri": "72513fe6-fc9e-4d2a-adac-bcbe8c3c9e9b",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "26270f3a-1510-48ae-8c8d-ca7dbeff60c1@f9941",
+      "uuid": "72513fe6-fc9e-4d2a-adac-bcbe8c3c9e9b@f9941",
       "displayName": "apple",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "26270f3a-1510-48ae-8c8d-ca7dbeff60c1@6c48a",
+        "imageUuidOrDatabaseUri": "72513fe6-fc9e-4d2a-adac-bcbe8c3c9e9b@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "26270f3a-1510-48ae-8c8d-ca7dbeff60c1@6c48a"
+    "redirect": "72513fe6-fc9e-4d2a-adac-bcbe8c3c9e9b@6c48a"
   }
 }

@@ -8,9 +8,10 @@ export class ReturnMenu extends Component {
     @property(AudioClip) buttonClip: AudioClip = null!;
 
     returnMenu(): void {
+        AudioMgr.inst.stopBGM();
         if (this.buttonClip) {
             AudioMgr.inst.playOneShot(this.buttonClip);
         }
-        director.loadScene('Menu-001');
+        director.loadScene('Menu');
     }
 }

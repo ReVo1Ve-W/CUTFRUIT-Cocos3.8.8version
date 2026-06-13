@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "6a8a9ee7-bb2a-4762-ad35-71bc45545d9e",
+  "uuid": "c7199fa2-239b-4f23-a203-4481e47eed7d",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "6a8a9ee7-bb2a-4762-ad35-71bc45545d9e@6c48a",
+      "uuid": "c7199fa2-239b-4f23-a203-4481e47eed7d@6c48a",
       "displayName": "按钮3",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "6a8a9ee7-bb2a-4762-ad35-71bc45545d9e",
+        "imageUuidOrDatabaseUri": "c7199fa2-239b-4f23-a203-4481e47eed7d",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "6a8a9ee7-bb2a-4762-ad35-71bc45545d9e@f9941",
+      "uuid": "c7199fa2-239b-4f23-a203-4481e47eed7d@f9941",
       "displayName": "按钮3",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6a8a9ee7-bb2a-4762-ad35-71bc45545d9e@6c48a",
+        "imageUuidOrDatabaseUri": "c7199fa2-239b-4f23-a203-4481e47eed7d@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "6a8a9ee7-bb2a-4762-ad35-71bc45545d9e@6c48a"
+    "redirect": "c7199fa2-239b-4f23-a203-4481e47eed7d@6c48a"
   }
 }

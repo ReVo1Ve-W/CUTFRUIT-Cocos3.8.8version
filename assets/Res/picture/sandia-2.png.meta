@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "b5971044-7e39-4ecb-b543-42389d1811c5",
+  "uuid": "f631bda3-8d46-4e0d-b855-19687ecac444",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "b5971044-7e39-4ecb-b543-42389d1811c5@6c48a",
+      "uuid": "f631bda3-8d46-4e0d-b855-19687ecac444@6c48a",
       "displayName": "sandia-2",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "b5971044-7e39-4ecb-b543-42389d1811c5",
+        "imageUuidOrDatabaseUri": "f631bda3-8d46-4e0d-b855-19687ecac444",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "b5971044-7e39-4ecb-b543-42389d1811c5@f9941",
+      "uuid": "f631bda3-8d46-4e0d-b855-19687ecac444@f9941",
       "displayName": "sandia-2",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "b5971044-7e39-4ecb-b543-42389d1811c5@6c48a",
+        "imageUuidOrDatabaseUri": "f631bda3-8d46-4e0d-b855-19687ecac444@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "b5971044-7e39-4ecb-b543-42389d1811c5@6c48a"
+    "redirect": "f631bda3-8d46-4e0d-b855-19687ecac444@6c48a"
   }
 }

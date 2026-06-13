@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "f0bddec5-11dc-487a-adb5-15af66266b8f",
+  "uuid": "85da0b0d-4584-4ebf-bf24-68a6c81c739a",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f0bddec5-11dc-487a-adb5-15af66266b8f@6c48a",
+      "uuid": "85da0b0d-4584-4ebf-bf24-68a6c81c739a@6c48a",
       "displayName": "MenuBackGround",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "f0bddec5-11dc-487a-adb5-15af66266b8f",
+        "imageUuidOrDatabaseUri": "85da0b0d-4584-4ebf-bf24-68a6c81c739a",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "f0bddec5-11dc-487a-adb5-15af66266b8f@f9941",
+      "uuid": "85da0b0d-4584-4ebf-bf24-68a6c81c739a@f9941",
       "displayName": "MenuBackGround",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f0bddec5-11dc-487a-adb5-15af66266b8f@6c48a",
+        "imageUuidOrDatabaseUri": "85da0b0d-4584-4ebf-bf24-68a6c81c739a@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": false,
-    "redirect": "f0bddec5-11dc-487a-adb5-15af66266b8f@6c48a"
+    "redirect": "85da0b0d-4584-4ebf-bf24-68a6c81c739a@6c48a"
   }
 }

@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "f6bf8069-a457-49ae-a411-c061bdc08818",
+  "uuid": "7880685f-4e45-48ee-bc4a-5aed9ff41150",
   "files": [
     ".jpg",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f6bf8069-a457-49ae-a411-c061bdc08818@6c48a",
+      "uuid": "7880685f-4e45-48ee-bc4a-5aed9ff41150@6c48a",
       "displayName": "frt_game_bg",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "f6bf8069-a457-49ae-a411-c061bdc08818",
+        "imageUuidOrDatabaseUri": "7880685f-4e45-48ee-bc4a-5aed9ff41150",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "f6bf8069-a457-49ae-a411-c061bdc08818@f9941",
+      "uuid": "7880685f-4e45-48ee-bc4a-5aed9ff41150@f9941",
       "displayName": "frt_game_bg",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f6bf8069-a457-49ae-a411-c061bdc08818@6c48a",
+        "imageUuidOrDatabaseUri": "7880685f-4e45-48ee-bc4a-5aed9ff41150@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": false,
-    "redirect": "f6bf8069-a457-49ae-a411-c061bdc08818@6c48a"
+    "redirect": "7880685f-4e45-48ee-bc4a-5aed9ff41150@6c48a"
   }
 }
