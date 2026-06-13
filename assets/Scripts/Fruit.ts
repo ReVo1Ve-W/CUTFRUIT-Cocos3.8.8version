@@ -5,8 +5,6 @@ import { random } from './utils';
 
 const { ccclass, property } = _decorator;
 
-const ANGULAR_VELOCITY = 100;
-
 @ccclass('Fruit')
 export class Fruit extends Component {
     @property(Node) comFruit: Node = null!;
@@ -39,7 +37,7 @@ export class Fruit extends Component {
         }
     }
 
-    init(poolName: string, score: number, gameScript: any, fruitGroup: any, juiceGroup: any): void {
+    init(poolName: string, score: number, gameScript: any, fruitGroup: any, juiceGroup: any, vx: number, vy: number, angVel: number): void {
         this.poolName = poolName;
         this.score = score;
         this.isCut = false;
@@ -57,11 +55,8 @@ export class Fruit extends Component {
         const rigidBody = this.node.getComponent(RigidBody2D);
         if (rigidBody) {
             rigidBody.enabled = true;
-            rigidBody.linearVelocity = new Vec2(0, 0);
-            const forceY = Math.floor(random(this.forceMin, this.forceMax));
-            const forceX = Math.floor(random(this.forceHorzMin, this.forceHorzMax));
-            rigidBody.angularVelocity = random(-1, 1) > 0 ? ANGULAR_VELOCITY : -ANGULAR_VELOCITY;
-            rigidBody.applyForceToCenter(new Vec2(this.node.position.x > 0 ? -forceX : forceX, forceY), true);
+            rigidBody.linearVelocity = new Vec2(vx, vy);
+            rigidBody.angularVelocity = angVel;
         }
 
         const col = this.node.getComponent(Collider2D);
@@ -72,22 +67,24 @@ export class Fruit extends Component {
         if (this._collisionPending) return;
 
         if (otherCollider.tag === COLLISION_TAG.KNIFE) {
-            if (!this.isCut) {
-                this._collisionPending = true;
-                this.scheduleOnce(() => {
-                    this._collisionPending = false;
-                    if (this.type === 'fruit') {
-                        this._juiceGroup?.createJuiceBg(this.node.getPosition(), this.colorType);
-                        this.playSplitAnimation();
-                        AudioMgr.inst.playOneShot(this.cutFruitAudio);
-                        this._gameScript?.updateScore(true, this.score);
-                    } else {
-                        this._fruitGroup?.cutBombRemoveAllChildren();
-                        AudioMgr.inst.playOneShot(this.cutBombAudio);
-                    }
-                });
-            }
+            if (this.isCut) return;
             this.isCut = true;
+            this._collisionPending = true;
+            const col = this.node.getComponent(Collider2D);
+            if (col) col.enabled = false;
+            this.scheduleOnce(() => {
+                this._collisionPending = false;
+                if (col) col.enabled = true;
+                if (this.type === 'fruit') {
+                    this._juiceGroup?.createJuiceBg(this.node.getPosition(), this.colorType);
+                    this.playSplitAnimation();
+                    AudioMgr.inst.playOneShot(this.cutFruitAudio);
+                    this._gameScript?.updateScore(true, this.score);
+                } else {
+                    this._fruitGroup?.cutBombRemoveAllChildren();
+                    AudioMgr.inst.playOneShot(this.cutBombAudio);
+                }
+            });
             return;
         }
 

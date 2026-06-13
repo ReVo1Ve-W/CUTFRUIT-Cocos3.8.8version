@@ -45,6 +45,8 @@ export class Game extends Component {
     }
 
     start(): void {
+        this.knife.active = false;
+        this.setKnifeColliderEnabled(false);
         this.registerTouchEvents();
         this.init();
     }
@@ -73,6 +75,7 @@ export class Game extends Component {
     }
 
     onTouchStart(event: EventTouch): void {
+        this.knife.active = true;
         const { x, y } = event.getUILocation();
         const uiTransform = this.knife.parent?.getComponent(UITransform);
         if (uiTransform) {
@@ -98,6 +101,8 @@ export class Game extends Component {
 
     onTouchEnd(_event: EventTouch): void {
         this.setKnifeColliderEnabled(false);
+        if (this.knifeMotionT?.stop) this.knifeMotionT.stop();
+        this.knife.active = false;
     }
 
     private setKnifeColliderEnabled(enabled: boolean): void {
