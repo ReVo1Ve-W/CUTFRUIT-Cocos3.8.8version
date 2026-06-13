@@ -22,11 +22,18 @@ export class MotionTrail extends Component {
 
     private _segments: TrailSegment[] = [];
     private _isActive: boolean = false;
+    private _hasEverCreatedSegment: boolean = false;
     private _lastPos: Vec3 = new Vec3();
 
     reset(): void {
         this._isActive = true;
+        this._hasEverCreatedSegment = false;
         this._lastPos = this.node.getPosition().clone();
+        this._clearTrails();
+    }
+
+    stop(): void {
+        this._isActive = false;
         this._clearTrails();
     }
 
@@ -51,7 +58,7 @@ export class MotionTrail extends Component {
             }
         }
 
-        if (this._segments.length === 0) {
+        if (this._segments.length === 0 && this._hasEverCreatedSegment) {
             this._isActive = false;
         }
     }
@@ -78,6 +85,7 @@ export class MotionTrail extends Component {
         sprite.sizeMode = Sprite.SizeMode.CUSTOM;
 
         this._segments.push({ position: pos, node: trailNode, sprite, elapsed: 0 });
+        this._hasEverCreatedSegment = true;
     }
 
     private _removeTrailAt(index: number): void {

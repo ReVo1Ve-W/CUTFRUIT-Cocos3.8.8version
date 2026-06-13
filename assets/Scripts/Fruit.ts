@@ -72,22 +72,21 @@ export class Fruit extends Component {
         if (this._collisionPending) return;
 
         if (otherCollider.tag === COLLISION_TAG.KNIFE) {
-            if (!this.isCut) {
-                this._collisionPending = true;
-                this.scheduleOnce(() => {
-                    this._collisionPending = false;
-                    if (this.type === 'fruit') {
-                        this._juiceGroup?.createJuiceBg(this.node.getPosition(), this.colorType);
-                        this.playSplitAnimation();
-                        AudioMgr.inst.playOneShot(this.cutFruitAudio);
-                        this._gameScript?.updateScore(true, this.score);
-                    } else {
-                        this._fruitGroup?.cutBombRemoveAllChildren();
-                        AudioMgr.inst.playOneShot(this.cutBombAudio);
-                    }
-                });
-            }
+            if (this.isCut) return;
             this.isCut = true;
+            this._collisionPending = true;
+            this.scheduleOnce(() => {
+                this._collisionPending = false;
+                if (this.type === 'fruit') {
+                    this._juiceGroup?.createJuiceBg(this.node.getPosition(), this.colorType);
+                    this.playSplitAnimation();
+                    AudioMgr.inst.playOneShot(this.cutFruitAudio);
+                    this._gameScript?.updateScore(true, this.score);
+                } else {
+                    this._fruitGroup?.cutBombRemoveAllChildren();
+                    AudioMgr.inst.playOneShot(this.cutBombAudio);
+                }
+            });
             return;
         }
 
