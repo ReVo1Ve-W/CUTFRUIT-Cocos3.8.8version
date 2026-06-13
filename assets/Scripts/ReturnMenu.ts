@@ -11,6 +11,6 @@ export class ReturnMenu extends Component {
         if (this.buttonClip) {
             AudioMgr.inst.playOneShot(this.buttonClip);
         }
-        director.loadScene('Menu');
+        director.loadScene('Menu-001');
     }
 }

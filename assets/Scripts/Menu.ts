@@ -16,7 +16,7 @@ export class Menu extends Component {
     private knifeMotionT: any = null;
 
     onLoad(): void {
-        director.preloadScene('Game');
+        director.preloadScene('Menu-001');
         this.knifeMotionT = this.knife.getComponent('MotionTrail');
     }
 
@@ -75,7 +75,7 @@ export class Menu extends Component {
 
     gameStart(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
-        director.loadScene('Game');
+        director.loadScene('Menu-001');
     }
 
     onDestroy(): void {

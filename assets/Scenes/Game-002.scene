@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "Game",
+    "_name": "Game-002",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -54,7 +54,7 @@
     "_globals": {
       "__id__": 100
     },
-    "_id": "1d40355c-f8a2-4ab8-b476-c90948dee131"
+    "_id": "4803685a-06a1-48db-ab5b-5ba927d33f36"
   },
   {
     "__type__": "cc.Node",
