@@ -160,7 +160,7 @@ export class Game extends Component {
 
     returnMenu(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
-        director.loadScene('Menu');
+        director.loadScene('Menu-001');
     }
 
     restartGame(): void {
