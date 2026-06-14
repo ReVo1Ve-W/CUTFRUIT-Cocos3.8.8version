@@ -53,6 +53,16 @@ export class AudioMgr {
         return this._audioSource?.playing ?? false;
     }
 
+    setBGMVolume(volume: number): void {
+        if (this._audioSource) {
+            this._audioSource.volume = Math.max(0, Math.min(1, volume));
+        }
+    }
+
+    getBGMVolume(): number {
+        return this._audioSource?.volume ?? 1;
+    }
+
     static destroy(): void {
         if (this._inst) {
             if (this._inst._node?.isValid) {

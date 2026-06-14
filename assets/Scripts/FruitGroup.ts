@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, Prefab, AudioClip, tween, UIOpacity, NodePool } from 'cc';
-import { TIMING, BOMB_FLASH, WAVE, THROW, PHYSICS } from './Constants';
+import { TIMING, BOMB_FLASH, THROW, PHYSICS, DIFFICULTY } from './Constants';
 import { AudioMgr } from './AudioMgr';
 import { batchInitObjPool, genNewNode, random, backObjPool, PoolConfig } from './utils';
 
@@ -23,6 +23,7 @@ export class FruitGroup extends Component {
     @property(AudioClip) throwBomb: AudioClip = null!;
 
     private noBombConfigs: FruitConfig[] = [];
+    private bombConfigs: FruitConfig[] = [];
     private _gameScript: any = null;
     private _juiceGroup: any = null;
     private _waveScheduled: boolean = false;
@@ -30,6 +31,8 @@ export class FruitGroup extends Component {
     private _halfWidth: number = 375;
     private _halfHeight: number = 375;
     private _spawnY: number = 0;
+    private _cfg: { speedScale: number; waveCountMin: number; waveCountMax: number; maxBombs: number; waveDelayMin: number; waveDelayMax: number } =
+        DIFFICULTY[1];
 
     onLoad(): void {
         this._gameScript = this.node.parent?.getComponent('Game');
@@ -38,6 +41,7 @@ export class FruitGroup extends Component {
             this._juiceGroup = juiceNode.getComponent('JuiceGroup');
         }
         this.noBombConfigs = this.fruitConfigs.filter(c => c.type === 'fruit');
+        this.bombConfigs = this.fruitConfigs.filter(c => c.type === 'bomb');
         batchInitObjPool(this._poolMap, this.fruitConfigs as PoolConfig[]);
 
         const parentUi = this.node.getComponent('UITransform') as any;
@@ -49,10 +53,14 @@ export class FruitGroup extends Component {
         this._spawnY = -this._halfHeight;
     }
 
+    setDifficulty(level: number): void {
+        this._cfg = DIFFICULTY[level] || DIFFICULTY[1];
+    }
+
     scheduleCreateWave(): void {
         if (this._waveScheduled) return;
         this._waveScheduled = true;
-        const delay = random(TIMING.WAVE_DELAY_MIN, TIMING.WAVE_DELAY_MAX);
+        const delay = random(this._cfg.waveDelayMin, this._cfg.waveDelayMax);
         this.scheduleOnce(() => {
             this._waveScheduled = false;
             this.createFruitList();
@@ -60,14 +68,15 @@ export class FruitGroup extends Component {
     }
 
     createFruitList(): void {
-        const count = Math.floor(random(WAVE.COUNT_MIN, WAVE.COUNT_MAX + 0.4));
+        const cfg = this._cfg;
+        const count = Math.floor(random(cfg.waveCountMin, cfg.waveCountMax + 0.4));
         const pattern = this.pickPattern();
         const targets = this.computeTargets(count, pattern);
         const bombIndices = this.pickBombSlots(count);
 
         for (let i = 0; i < count; i++) {
             const isBomb = bombIndices.has(i);
-            const configs = isBomb ? this.fruitConfigs : this.noBombConfigs;
+            const configs = isBomb ? this.bombConfigs : this.noBombConfigs;
             const idx = Math.floor(random(0, configs.length - 0.1));
             const cfg = configs[idx];
 
@@ -127,7 +136,7 @@ export class FruitGroup extends Component {
     private pickBombSlots(count: number): Set<number> {
         const set = new Set<number>();
         if (count <= 1) return set;
-        const maxBombs = Math.min(WAVE.MAX_BOMBS, Math.floor(count / 2));
+        const maxBombs = Math.min(this._cfg.maxBombs, Math.floor(count / 2));
         if (maxBombs <= 0) return set;
         const bombCount = Math.floor(random(0, maxBombs + 0.5));
         while (set.size < bombCount) {
@@ -153,8 +162,8 @@ export class FruitGroup extends Component {
         const apexHeight = screenH * random(THROW.APEX_RATIO_MIN, THROW.APEX_RATIO_MAX);
         const tRise = Math.sqrt(2 * apexHeight / g);
         const vy = g * tRise * THROW.SPEED_SCALE;
-        const vx = ((target.targetX - target.spawnX) / (2 * tRise)) * THROW.SPEED_SCALE;
-        const angVel = (random(-1, 1) > 0 ? 1 : -1) * random(THROW.ANG_VEL_MIN, THROW.ANG_VEL_MAX) * THROW.SPEED_SCALE;
+        const vx = ((target.targetX - target.spawnX) / (2 * tRise)) * THROW.SPEED_SCALE * this._cfg.speedScale;
+        const angVel = (random(-1, 1) > 0 ? 1 : -1) * random(THROW.ANG_VEL_MIN, THROW.ANG_VEL_MAX) * THROW.SPEED_SCALE * this._cfg.speedScale;
 
         const fruitComp: any = fruitNode.getComponent('Fruit');
         fruitComp?.init(poolName, cfg.score, this._gameScript, this, this._juiceGroup,
