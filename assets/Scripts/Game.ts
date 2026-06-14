@@ -159,13 +159,16 @@ export class Game extends Component {
             this.showGameOverMask(true);
         }, TIMING.GAME_OVER_DELAY);
 
+    }
+
+    returnbegin(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
-        director.loadScene('Menu');
+        director.loadScene('Begin');
     }
 
     returnMenu(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
-        director.loadScene('Begin');
+        director.loadScene('Menu');
     }
 
     restartGame(): void {

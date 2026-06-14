@@ -3131,7 +3131,7 @@
     },
     "component": "",
     "_componentId": "175deQV+IFLq4e5bCQOXTLS",
-    "handler": "gameOver",
+    "handler": "returnbegin",
     "customEventData": ""
   },
   {

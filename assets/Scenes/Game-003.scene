@@ -1607,8 +1607,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 61.034,
-      "y": 12.118,
+      "x": -42.826,
+      "y": 3.142,
       "z": 0
     },
     "_lrot": {
@@ -1713,8 +1713,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 12.118,
+      "x": 6.251,
+      "y": 3.142,
       "z": 0
     },
     "_lrot": {
@@ -1822,8 +1822,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -51.821,
-      "y": 12.118,
+      "x": 55.405,
+      "y": 3.142,
       "z": 0
     },
     "_lrot": {
@@ -2057,7 +2057,7 @@
         "__id__": 86
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 94
@@ -3131,7 +3131,7 @@
     },
     "component": "",
     "_componentId": "175deQV+IFLq4e5bCQOXTLS",
-    "handler": "gameOverHandle",
+    "handler": "returnbegin",
     "customEventData": ""
   },
   {
