@@ -1304,6 +1304,7 @@
     "bestScoreLabel": {
       "__id__": 69
     },
+    "settingPanel": null,
     "buttonClip": {
       "__uuid__": "848f14ec-44a5-45e3-b648-9a1f680b18b8",
       "__expectedType__": "cc.AudioClip"
@@ -2162,8 +2163,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 210,
-      "height": 90.39999999999999
+      "width": 209.9524960275424,
+      "height": 90.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2195,7 +2196,7 @@
     "_string": "最佳分数 : 0\n",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 35,
+    "_actualFontSize": 38.71875,
     "_fontSize": 35,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -2352,8 +2353,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
-      "height": 90.39999999999999
+      "width": 119.97285487288136,
+      "height": 90.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2385,7 +2386,7 @@
     "_string": "重新开始\n",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 30,
+    "_actualFontSize": 33.1875,
     "_fontSize": 30,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -2664,8 +2665,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
-      "height": 90.39999999999999
+      "width": 149.9660685911017,
+      "height": 90.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2697,7 +2698,7 @@
     "_string": "返回主菜单\n",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 30,
+    "_actualFontSize": 33.1875,
     "_fontSize": 30,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -2976,8 +2977,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 140,
-      "height": 90.39999999999999
+      "width": 139.96833068502826,
+      "height": 90.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3009,7 +3010,7 @@
     "_string": "游戏结束\n",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 35,
+    "_actualFontSize": 38.71875,
     "_fontSize": 35,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -5098,6 +5099,9 @@
     "__prefab": null,
     "settingPanel": {
       "__id__": 98
+    },
+    "gameOverMask": {
+      "__id__": 66
     },
     "volumeSlider": {
       "__id__": 109

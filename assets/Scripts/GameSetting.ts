@@ -8,10 +8,13 @@ const VOLUME_KEY = 'bgm_volume';
 @ccclass('GameSetting')
 export class GameSetting extends Component {
     @property(Node) settingPanel: Node = null!;
+    @property(Node) gameOverMask: Node = null!;
     @property(Slider) volumeSlider: Slider = null!;
     @property(Node) btnPause: Node = null!;
     @property(Node) btnPlay: Node = null!;
     @property(AudioClip) buttonClip: AudioClip = null!;
+
+    private _wasGameOverShowing: boolean = false;
 
     onLoad(): void {
         this.settingPanel.active = false;
@@ -24,12 +27,28 @@ export class GameSetting extends Component {
 
     togglePanel(): void {
         if (this.buttonClip) AudioMgr.inst.playOneShot(this.buttonClip);
-        this.settingPanel.active = !this.settingPanel.active;
+        const show = !this.settingPanel.active;
+        this.settingPanel.active = show;
+        if (show) {
+            if (this.gameOverMask && this.gameOverMask.active) {
+                this._wasGameOverShowing = true;
+                this.gameOverMask.active = false;
+            }
+        } else {
+            if (this._wasGameOverShowing && this.gameOverMask) {
+                this.gameOverMask.active = true;
+            }
+            this._wasGameOverShowing = false;
+        }
     }
 
     onPanelBgClick(event: EventTouch): void {
         if (event.target === this.settingPanel) {
             this.settingPanel.active = false;
+            if (this._wasGameOverShowing && this.gameOverMask) {
+                this.gameOverMask.active = true;
+            }
+            this._wasGameOverShowing = false;
         }
     }
 
