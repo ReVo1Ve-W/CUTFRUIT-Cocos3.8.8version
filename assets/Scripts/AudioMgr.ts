@@ -24,6 +24,8 @@ export class AudioMgr {
 
     playBGM(clip: AudioClip, volume: number = 1): void {
         if (!this._audioSource || !clip) return;
+        // 如果相同的BGM正在播放，跳过避免重启
+        if (this._audioSource.playing && this._audioSource.clip === clip) return;
         this._audioSource.stop();
         this._audioSource.clip = clip;
         this._audioSource.loop = true;

@@ -206,7 +206,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 398.40562719812425,
+    "_orthoHeight": 449.6296296296296,
     "_near": 0,
     "_far": 2000,
     "_color": {
@@ -603,8 +603,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 109.76998901367188,
-      "height": 79.25399999999999
+      "width": 109.79997422960069,
+      "height": 79.254
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -636,7 +636,7 @@
     "_string": "糖果星",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 36.6,
+    "_actualFontSize": 49.410000000000004,
     "_fontSize": 36.6,
     "_fontFamily": "Arial",
     "_lineHeight": 62.9,
@@ -932,8 +932,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 109.76998901367188,
-      "height": 79.25399999999999
+      "width": 109.79997422960069,
+      "height": 79.254
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -965,7 +965,7 @@
     "_string": "春芽星",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 36.6,
+    "_actualFontSize": 49.410000000000004,
     "_fontSize": 36.6,
     "_fontFamily": "Arial",
     "_lineHeight": 62.9,
@@ -1261,8 +1261,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 109.76998901367188,
-      "height": 79.25399999999999
+      "width": 109.79997422960069,
+      "height": 79.254
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1294,7 +1294,7 @@
     "_string": "珊瑚星",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 36.6,
+    "_actualFontSize": 49.410000000000004,
     "_fontSize": 36.6,
     "_fontFamily": "Arial",
     "_lineHeight": 62.9,
@@ -1702,7 +1702,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 108,
+      "width": 107.99999095775462,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1735,7 +1735,7 @@
     "_string": "返回菜单",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 27,
+    "_actualFontSize": 36.45,
     "_fontSize": 27,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1972,7 +1972,7 @@
     "_string": "选择地图",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 70,
+    "_actualFontSize": 94.5,
     "_fontSize": 70,
     "_fontFamily": "Arial",
     "_lineHeight": 80,

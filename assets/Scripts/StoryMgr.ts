@@ -9,6 +9,8 @@ export class StoryMgr extends Component {
     @property({ tooltip: '每秒显示字符数' }) typingSpeed: number = 30;
     @property(AudioClip) typingSound: AudioClip | null = null;
 
+    private static _hasPlayed: boolean = false;
+
     private _currentIndex: number = 0;
     private _accumulator: number = 0;
     private _isTyping: boolean = false;
@@ -20,7 +22,13 @@ export class StoryMgr extends Component {
     }
 
     start(): void {
-        this.reset();
+        if (!StoryMgr._hasPlayed) {
+            StoryMgr._hasPlayed = true;
+            this.reset();
+        } else {
+            // 从Book等子场景返回时，直接显示完整文本，不重新播放打字机效果
+            this.textLabel.string = this.fullText;
+        }
     }
 
     update(deltaTime: number): void {
