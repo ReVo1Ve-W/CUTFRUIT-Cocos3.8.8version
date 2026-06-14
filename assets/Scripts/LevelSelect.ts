@@ -9,27 +9,27 @@ export class LevelSelect extends Component {
 
     onLoad(): void {
         // 预加载三个游戏场景
-        director.preloadScene('Game');
         director.preloadScene('Game-001');
         director.preloadScene('Game-002');
+        director.preloadScene('Game-003');
     }
 
     startGame0(): void {
         if (this.buttonClip) AudioMgr.inst.playOneShot(this.buttonClip);
         AudioMgr.inst.stopBGM();
-        director.loadScene('Game');
+        director.loadScene('Game-001');
     }
 
     startGame1(): void {
         if (this.buttonClip) AudioMgr.inst.playOneShot(this.buttonClip);
         AudioMgr.inst.stopBGM();
-        director.loadScene('Game-001');
+        director.loadScene('Game-002');
     }
 
     startGame2(): void {
         if (this.buttonClip) AudioMgr.inst.playOneShot(this.buttonClip);
         AudioMgr.inst.stopBGM();
-        director.loadScene('Game-002');
+        director.loadScene('Game-003');
     }
 
     returnMenu(): void {

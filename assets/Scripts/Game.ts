@@ -17,6 +17,7 @@ export class Game extends Component {
     @property(Node) gameOverMask: Node = null!;
     @property(Label) bestScoreLabel: Label = null!;
     @property(AudioClip) buttonClip: AudioClip = null!;
+    @property({ tooltip: '难度 1/2/3' }) difficulty: number = 1;
 
     private fruitGroup: any = null;
     private knifeMotionT: any = null;
@@ -65,6 +66,7 @@ export class Game extends Component {
         this.life = 0;
         this.lifeIcons.forEach(a => { a.lifeConsume.active = false; });
         this.updateUI();
+        this.fruitGroup?.setDifficulty?.(this.difficulty);
         this.fruitGroup?.createFruitList();
     }
 
@@ -156,11 +158,14 @@ export class Game extends Component {
         this.scheduleOnce(() => {
             this.showGameOverMask(true);
         }, TIMING.GAME_OVER_DELAY);
+
+        AudioMgr.inst.playOneShot(this.buttonClip);
+        director.loadScene('Menu');
     }
 
     returnMenu(): void {
         AudioMgr.inst.playOneShot(this.buttonClip);
-        director.loadScene('Menu-001');
+        director.loadScene('Begin');
     }
 
     restartGame(): void {

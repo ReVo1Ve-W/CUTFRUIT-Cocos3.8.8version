@@ -9,7 +9,7 @@ export const TIMING = {
     WAVE_DELAY_MAX: 1.5,
     STAGGER_MIN: 0.04,
     STAGGER_MAX: 0.2,
-    JUICE_FADE_DURATION: 1.5,
+    JUICE_FADE_DURATION: 5.0,
     ROTATE_DURATION: 7,
     GAME_OVER_DELAY: 0.5,
     FLASH_DURATION: 0.8,
@@ -51,4 +51,10 @@ export const BOMB_FLASH = {
 
 export const PHYSICS = {
     GRAVITY_Y: -320,
+} as const;
+
+export const DIFFICULTY = {
+    1: { speedScale: 1.0, waveCountMin: 2, waveCountMax: 6, maxBombs: 2, waveDelayMin: 0.3, waveDelayMax: 1.5 },
+    2: { speedScale: 1.4, waveCountMin: 3, waveCountMax: 7, maxBombs: 3, waveDelayMin: 0.2, waveDelayMax: 1.1 },
+    3: { speedScale: 1.8, waveCountMin: 4, waveCountMax: 9, maxBombs: 4, waveDelayMin: 0.15, waveDelayMax: 0.8 },
 } as const;
