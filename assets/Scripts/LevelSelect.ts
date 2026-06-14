@@ -16,16 +16,19 @@ export class LevelSelect extends Component {
 
     startGame0(): void {
         if (this.buttonClip) AudioMgr.inst.playOneShot(this.buttonClip);
+        AudioMgr.inst.stopBGM();
         director.loadScene('Game');
     }
 
     startGame1(): void {
         if (this.buttonClip) AudioMgr.inst.playOneShot(this.buttonClip);
+        AudioMgr.inst.stopBGM();
         director.loadScene('Game-001');
     }
 
     startGame2(): void {
         if (this.buttonClip) AudioMgr.inst.playOneShot(this.buttonClip);
+        AudioMgr.inst.stopBGM();
         director.loadScene('Game-002');
     }
 

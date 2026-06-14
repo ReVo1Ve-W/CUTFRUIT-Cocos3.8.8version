@@ -86,7 +86,6 @@ export class Menu extends Component {
     }
 
     gameStart(): void {
-        AudioMgr.inst.stopBGM();
         AudioMgr.inst.playOneShot(this.buttonClip);
         director.loadScene('Begin');
     }
