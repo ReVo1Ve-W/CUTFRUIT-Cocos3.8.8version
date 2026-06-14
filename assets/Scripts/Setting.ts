@@ -12,8 +12,4 @@ export class Setting extends Component {
             AudioMgr.inst.playBGM(this.bgmClip);
         }
     }
-
-    onDestroy(): void {
-        AudioMgr.inst.stopBGM();
-    }
 }
