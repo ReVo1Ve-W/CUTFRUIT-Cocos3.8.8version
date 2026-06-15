@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "2ef5a906-3f56-408e-8f7f-b45d47f98753",
+  "uuid": "91ac89ba-0341-41a7-ae24-8ff722133468",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "2ef5a906-3f56-408e-8f7f-b45d47f98753@6c48a",
+      "uuid": "91ac89ba-0341-41a7-ae24-8ff722133468@6c48a",
       "displayName": "newGame",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "2ef5a906-3f56-408e-8f7f-b45d47f98753",
+        "imageUuidOrDatabaseUri": "91ac89ba-0341-41a7-ae24-8ff722133468",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "2ef5a906-3f56-408e-8f7f-b45d47f98753@f9941",
+      "uuid": "91ac89ba-0341-41a7-ae24-8ff722133468@f9941",
       "displayName": "newGame",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "2ef5a906-3f56-408e-8f7f-b45d47f98753@6c48a",
+        "imageUuidOrDatabaseUri": "91ac89ba-0341-41a7-ae24-8ff722133468@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "2ef5a906-3f56-408e-8f7f-b45d47f98753@6c48a"
+    "redirect": "91ac89ba-0341-41a7-ae24-8ff722133468@6c48a"
   }
 }

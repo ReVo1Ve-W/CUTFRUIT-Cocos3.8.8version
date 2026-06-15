@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "c11dc13b-a435-48c5-be82-9f3db8447f97",
+  "uuid": "a2a478d9-a2e4-4143-83b6-e2167c722d07",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "c11dc13b-a435-48c5-be82-9f3db8447f97@6c48a",
+      "uuid": "a2a478d9-a2e4-4143-83b6-e2167c722d07@6c48a",
       "displayName": "sandia-1",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "c11dc13b-a435-48c5-be82-9f3db8447f97",
+        "imageUuidOrDatabaseUri": "a2a478d9-a2e4-4143-83b6-e2167c722d07",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "c11dc13b-a435-48c5-be82-9f3db8447f97@f9941",
+      "uuid": "a2a478d9-a2e4-4143-83b6-e2167c722d07@f9941",
       "displayName": "sandia-1",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c11dc13b-a435-48c5-be82-9f3db8447f97@6c48a",
+        "imageUuidOrDatabaseUri": "a2a478d9-a2e4-4143-83b6-e2167c722d07@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "c11dc13b-a435-48c5-be82-9f3db8447f97@6c48a"
+    "redirect": "a2a478d9-a2e4-4143-83b6-e2167c722d07@6c48a"
   }
 }

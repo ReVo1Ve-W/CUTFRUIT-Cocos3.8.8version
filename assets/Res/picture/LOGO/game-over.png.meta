@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "130e2452-d085-4e43-b731-5de05e372afb",
+  "uuid": "b1590bd2-9269-4dd0-8f2d-71efb8c330b1",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "130e2452-d085-4e43-b731-5de05e372afb@6c48a",
+      "uuid": "b1590bd2-9269-4dd0-8f2d-71efb8c330b1@6c48a",
       "displayName": "game-over",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "130e2452-d085-4e43-b731-5de05e372afb",
+        "imageUuidOrDatabaseUri": "b1590bd2-9269-4dd0-8f2d-71efb8c330b1",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "130e2452-d085-4e43-b731-5de05e372afb@f9941",
+      "uuid": "b1590bd2-9269-4dd0-8f2d-71efb8c330b1@f9941",
       "displayName": "game-over",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "130e2452-d085-4e43-b731-5de05e372afb@6c48a",
+        "imageUuidOrDatabaseUri": "b1590bd2-9269-4dd0-8f2d-71efb8c330b1@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "130e2452-d085-4e43-b731-5de05e372afb@6c48a"
+    "redirect": "b1590bd2-9269-4dd0-8f2d-71efb8c330b1@6c48a"
   }
 }

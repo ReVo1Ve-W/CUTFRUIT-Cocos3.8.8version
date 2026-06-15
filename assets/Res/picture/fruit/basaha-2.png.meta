@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "fe691e31-218f-41a1-89f7-364d472708fe",
+  "uuid": "c62afd57-1221-4466-91b9-2087cbf1a24b",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "fe691e31-218f-41a1-89f7-364d472708fe@6c48a",
+      "uuid": "c62afd57-1221-4466-91b9-2087cbf1a24b@6c48a",
       "displayName": "basaha-2",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "fe691e31-218f-41a1-89f7-364d472708fe",
+        "imageUuidOrDatabaseUri": "c62afd57-1221-4466-91b9-2087cbf1a24b",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "fe691e31-218f-41a1-89f7-364d472708fe@f9941",
+      "uuid": "c62afd57-1221-4466-91b9-2087cbf1a24b@f9941",
       "displayName": "basaha-2",
       "id": "f9941",
       "name": "spriteFrame",
@@ -113,7 +113,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "fe691e31-218f-41a1-89f7-364d472708fe@6c48a",
+        "imageUuidOrDatabaseUri": "c62afd57-1221-4466-91b9-2087cbf1a24b@6c48a",
         "atlasUuid": "",
         "trimType": "auto"
       },
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "fe691e31-218f-41a1-89f7-364d472708fe@6c48a"
+    "redirect": "c62afd57-1221-4466-91b9-2087cbf1a24b@6c48a"
   }
 }
